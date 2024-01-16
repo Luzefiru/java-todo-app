@@ -1,0 +1,4 @@
+*.class
+tempCodeRunnerFile.*
+.env
+node_modules
