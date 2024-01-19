@@ -1,6 +1,28 @@
 import TodoTableRow from './TodoEntry';
+import { useState, useEffect } from 'react';
+import todoService from '../services/todo.service';
 
 function TodoTable() {
+  const [todos, setTodos] = useState(undefined);
+
+  console.log(todos);
+
+  useEffect(() => {
+    const fetchTodos = async () => {
+      const fetchedTodos = await todoService.getTodos();
+      setTodos(fetchedTodos);
+    };
+    fetchTodos();
+  }, []);
+
+  if (todos === undefined) {
+    return (
+      <div className="flex items-center justify-center w-full mt-16">
+        <span className="loading loading-ring loading-lg" />
+      </div>
+    );
+  }
+
   return (
     <div className="overflow-x-auto">
       <table className="table">
@@ -16,16 +38,14 @@ function TodoTable() {
         </thead>
         {/* body */}
         <tbody>
-          <TodoTableRow
-            title={'Study Data Structures & Algorithms'}
-            dueDateISO={'2024-01-16T23:55:54.906Z'}
-            isCompleted={false}
-          />
-          <TodoTableRow
-            title={'Take out the Trash'}
-            dueDateISO={'2024-01-22T18:30:00.000Z'}
-            isCompleted={true}
-          />
+          {todos?.map((t) => (
+            <TodoTableRow
+              title={t.title}
+              dueDateISO={t.due_date}
+              isCompleted={t.is_completed}
+              key={t.id}
+            />
+          ))}
         </tbody>
         {/* foot */}
       </table>

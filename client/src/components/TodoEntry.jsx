@@ -19,11 +19,11 @@ function TodoTableRow({ title, dueDateISO, isCompleted }) {
       <td>
         <div>
           <span
-            className={`p-2 badge badge-sm ${
+            className={`p-2 w-16 badge badge-sm ${
               isCompleted ? 'badge-success' : 'badge-error'
             }`}
           >
-            {isCompleted ? 'Done' : 'To be done'}
+            {isCompleted ? 'Complete' : 'Pending'}
           </span>
         </div>
       </td>
