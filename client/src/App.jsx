@@ -6,7 +6,7 @@ function App() {
     <>
       <div className="flex flex-col h-screen">
         <Navbar />
-        <main className="mx-24 my-8">
+        <main className="mx-8 my-8 lg:mx-24">
           <TodoTable />
         </main>
         <footer className="mt-auto">Insert footer here</footer>
