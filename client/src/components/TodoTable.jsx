@@ -5,8 +5,6 @@ import todoService from '../services/todo.service';
 function TodoTable() {
   const [todos, setTodos] = useState(undefined);
 
-  console.log(todos);
-
   useEffect(() => {
     const fetchTodos = async () => {
       const fetchedTodos = await todoService.getTodos();
@@ -24,7 +22,7 @@ function TodoTable() {
   }
 
   return (
-    <div className="overflow-x-auto">
+    <div className="overflow-x-auto border-[1px] rounded-lg shadow">
       <table className="table">
         {/* head */}
         <thead>
