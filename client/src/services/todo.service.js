@@ -17,8 +17,6 @@ const todoService = (() => {
   };
 
   const updateTodo = async ({ id, title, dueDate, isCompleted }) => {
-    console.log(dueDate);
-
     const { data } = await axios.put(`${baseUrl}/${id}`, {
       id,
       title,

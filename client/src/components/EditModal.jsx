@@ -3,10 +3,12 @@ import todoService from '../services/todo.service';
 import propTypes from 'prop-types';
 
 function EditModal({ id, title, dueDateISO, isCompleted }) {
-  console.log({ id, title, dueDateISO, isCompleted });
   const [newTitle, setNewTitle] = useState(title);
   const [dueDate, setDueDate] = useState(
     dueDateISO ? new Date(dueDateISO).toISOString().slice(0, 16) : ''
+  );
+  const [newIsCompleted, setNewIsCompleted] = useState(
+    isCompleted ? 'Completed' : 'Pending'
   );
   const [error, setError] = useState('');
 
@@ -40,7 +42,7 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
           id,
           title: newTitle,
           dueDate,
-          isCompleted,
+          isCompleted: newIsCompleted === 'Complete',
         });
         setNewTitle('');
         setDueDate('');
@@ -119,18 +121,36 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
               placeholder="Something to do"
               className="w-full input input-bordered"
             />
-            <div className="mt-2">
-              <label className="label">
-                <span className="font-semibold label-text">Due Date</span>
-              </label>
-              <input
-                value={dueDate}
-                onChange={(e) => {
-                  handleChange(e, setDueDate);
-                }}
-                type="datetime-local"
-                className="w-full input input-bordered"
-              />
+            <div className="flex justify-between gap-4 mt-2">
+              <div className="w-full">
+                <label className="label">
+                  <span className="font-semibold label-text">Due Date</span>
+                </label>
+                <input
+                  value={dueDate}
+                  onChange={(e) => {
+                    handleChange(e, setDueDate);
+                  }}
+                  type="datetime-local"
+                  className="w-full input input-bordered"
+                />
+              </div>
+
+              <div className="w-1/5">
+                <label className="label">
+                  <span className="font-semibold label-text">Status</span>
+                </label>
+                <select
+                  className="w-full select select-bordered join-item"
+                  value={newIsCompleted}
+                  onChange={(e) => {
+                    handleChange(e, setNewIsCompleted);
+                  }}
+                >
+                  <option>Complete</option>
+                  <option>Pending</option>
+                </select>
+              </div>
             </div>
           </div>
           {error !== '' && <p className="font-semibold text-error">{error}</p>}
