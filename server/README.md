@@ -31,12 +31,14 @@ Get a list of all todos.
   {
     "id": 1,
     "title": "Complete project",
-    "completed": false
+    "is_completed": false,
+    "due_date": "2024-01-16T23:55:54.906Z"
   },
   {
     "id": 2,
     "title": "Read a book",
-    "completed": true
+    "is_completed": true,
+    "due_date": null
   }
 ]
 ```
@@ -61,7 +63,8 @@ Get a specific todo by its ID.
 {
   "id": 1,
   "title": "Complete project",
-  "completed": false
+  "is_completed": false,
+  "due_date": "2024-01-16T23:55:54.906Z"
 }
 ```
 
@@ -75,7 +78,10 @@ Get a specific todo by its ID.
 ### Request Body
 
 ```json
-{ "title": "New task" }
+{ 
+  "title": "New task",
+  "due_date": "2024-01-16T23:55:54.906Z"
+}
 ```
 
 
@@ -86,10 +92,11 @@ Create a new todo.
 ### Response
 
 ```json
-{ 
+{
   "id": 3,
   "title": "New task",
-  "completed": false
+  "is_completed": false,
+  "due_date": "2024-01-16T23:55:54.906Z"
 }
 ```
 ## 4. Update Todo
@@ -107,7 +114,8 @@ Create a new todo.
 ```json
 { 
   "title": "Updated task",
-  "completed": true
+  "due_date": "2024-01-16T23:55:54.906Z"
+  "is_completed": true
 }
 ```
 
@@ -119,8 +127,10 @@ Update a todo by its ID.
 
 ```json
 {
-  "id": 3, "title": "Updated task",
-  "completed": true
+  "id": 3,
+  "title": "Updated task",
+  "is_completed": true,
+  "due_date": null
 }
 ```
 
