@@ -1,4 +1,4 @@
-import TodoTableRow from './TodoEntry';
+import TodoEntry from './TodoEntry';
 import { useState, useEffect } from 'react';
 import todoService from '../services/todo.service';
 
@@ -37,7 +37,8 @@ function TodoTable() {
         {/* body */}
         <tbody>
           {todos?.map((t) => (
-            <TodoTableRow
+            <TodoEntry
+              id={Number(t.id)}
               title={t.title}
               dueDateISO={t.due_date}
               isCompleted={t.is_completed}

@@ -7,21 +7,23 @@ const todoService = (() => {
     return data;
   };
 
-  const createTodo = async ({ title, dueDateISO, isCompleted }) => {
+  const createTodo = async ({ title, dueDate, isCompleted }) => {
     const { data } = await axios.post(baseUrl, {
       title,
-      dueDateISO,
-      isCompleted,
+      due_date: new Date(dueDate).toISOString(),
+      is_completed: isCompleted,
     });
     return data;
   };
 
-  const updateTodo = async ({ id, title, dueDateISO, isCompleted }) => {
+  const updateTodo = async ({ id, title, dueDate, isCompleted }) => {
+    console.log(dueDate);
+
     const { data } = await axios.put(`${baseUrl}/${id}`, {
       id,
       title,
-      dueDateISO,
-      isCompleted,
+      due_date: new Date(dueDate).toISOString(),
+      is_completed: isCompleted,
     });
     return data;
   };

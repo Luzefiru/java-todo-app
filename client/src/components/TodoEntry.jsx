@@ -1,7 +1,15 @@
-import EditButton from './EditButton';
+import EditModal from './EditModal';
 import propTypes from 'prop-types';
 
-function TodoTableRow({ title, dueDateISO, isCompleted }) {
+function TodoEntry({ id, title, dueDateISO, isCompleted }) {
+  const dueDateRenderedValue =
+    dueDateISO !== null
+      ? new Date(dueDateISO).toLocaleString('en-US', {
+          dateStyle: 'long',
+          timeStyle: 'short',
+        })
+      : 'No due date';
+
   return (
     <tr>
       <th>
@@ -10,12 +18,7 @@ function TodoTableRow({ title, dueDateISO, isCompleted }) {
         </label>
       </th>
       <td>{title}</td>
-      <td>
-        {new Date(dueDateISO).toLocaleString('en-US', {
-          dateStyle: 'long',
-          timeStyle: 'short',
-        })}
-      </td>
+      <td>{dueDateRenderedValue}</td>
       <td>
         <div>
           <span
@@ -28,16 +31,22 @@ function TodoTableRow({ title, dueDateISO, isCompleted }) {
         </div>
       </td>
       <th>
-        <EditButton />
+        <EditModal
+          id={id}
+          title={title}
+          dueDateISO={dueDateISO}
+          isCompleted={isCompleted}
+        />
       </th>
     </tr>
   );
 }
 
-TodoTableRow.propTypes = {
+TodoEntry.propTypes = {
+  id: propTypes.number.isRequired,
   title: propTypes.string.isRequired,
-  dueDateISO: propTypes.string.isRequired,
+  dueDateISO: propTypes.string,
   isCompleted: propTypes.bool.isRequired,
 };
 
-export default TodoTableRow;
+export default TodoEntry;
