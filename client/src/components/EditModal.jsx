@@ -8,7 +8,7 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
     dueDateISO ? new Date(dueDateISO).toISOString().slice(0, 16) : ''
   );
   const [newIsCompleted, setNewIsCompleted] = useState(
-    isCompleted ? 'Completed' : 'Pending'
+    isCompleted ? 'Complete' : 'Pending'
   );
   const [error, setError] = useState('');
 
@@ -58,6 +58,12 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
   };
 
   const handleChange = (e, setFn) => {
+    console.log({
+      id,
+      title: newTitle,
+      dueDate,
+      isCompleted: newIsCompleted === 'Complete',
+    });
     setFn(e.target.value);
   };
 
