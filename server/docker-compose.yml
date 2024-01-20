@@ -1,4 +1,3 @@
-# Use root/example as user/password credentials
 services:
   db:
     image: mysql
@@ -8,7 +7,6 @@ services:
     restart: always
     environment:
       MYSQL_ALLOW_EMPTY_PASSWORD: yes
-      # MYSQL_ROOT_PASSWORD: example
       MYSQL_DATABASE: todoapp
     ports:
       - 3306:3306
