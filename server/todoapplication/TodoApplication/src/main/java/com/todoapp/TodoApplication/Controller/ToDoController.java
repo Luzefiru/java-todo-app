@@ -10,6 +10,7 @@ import java.util.List;
 import java.util.Optional;
 
 import com.todoapp.TodoApplication.Models.Task;
+
 @RestController
 @RequestMapping("/api")
 public class ToDoController {
@@ -17,24 +18,23 @@ public class ToDoController {
     @Autowired
     private ToDoRepo todorepo;
 
-
-    @GetMapping(value = "/get/todos")
-    public List<Task> getAllToDos(){
+    @GetMapping(value = "/todos")
+    public List<Task> getAllToDos() {
         return todorepo.findAll();
     }
 
-    @GetMapping(value = "/get/todos/{taskID}")
-    public Optional<Task> getTodoById(@PathVariable long taskID){
+    @GetMapping(value = "/todos/{taskID}")
+    public Optional<Task> getTodoById(@PathVariable long taskID) {
         return todorepo.findById(taskID);
     }
 
-    @PostMapping(value = "/post/todos")
-    public String createToDo(@RequestBody Task task){
+    @PostMapping(value = "/todos")
+    public String createToDo(@RequestBody Task task) {
         todorepo.save(task);
         return "Task created!";
     }
 
-    @PutMapping(value = "/put/todos/{taskID}")
+    @PutMapping(value = "/todos/{taskID}")
     public ResponseEntity<String> updateTodo(@PathVariable long taskID, @RequestBody Task task) {
         Optional<Task> optionalTask = todorepo.findById(taskID);
 
@@ -54,8 +54,8 @@ public class ToDoController {
         }
     }
 
-    @DeleteMapping(value = "/delete/todos/{taskID}")
-    public String deleteTodoById(@PathVariable long taskID){
+    @DeleteMapping(value = "/todos/{taskID}")
+    public String deleteTodoById(@PathVariable long taskID) {
         Task deleteTodo = todorepo.findById(taskID).get();
         todorepo.delete(deleteTodo);
         return "Deleted task with the id: " + taskID;
