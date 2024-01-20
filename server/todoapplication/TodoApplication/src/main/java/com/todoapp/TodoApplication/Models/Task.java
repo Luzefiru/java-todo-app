@@ -9,7 +9,7 @@ public class Task {
     private int taskID;
     @Column
     private String title;
-    @Column
+    @Column(nullable = true)
     private String description;
     @Column(nullable = true)
     private String due_date;
