@@ -25,6 +25,17 @@ npm run dev
 
 It will be accessible via `http://localhost:5173`.
 
+### Database
+
+This requires [XAMPP](https://www.apachefriends.org/download.html) to be running with a `todoapp` database.
+
+1. In XAMPP, start Apache.
+2. In XAMPP, start MySQL at port 3306 (default).
+3. Create a `todoapp` database.
+4. Click it & press the "Import" button at the navbar.
+5. In the "File to import:" section, use the `server/todoapplication/TodoApplication/src/main/java/SQL File/task.sql` file.
+6. Click "Import".
+
 ### Backend Server
 
 In an IDE, run the `server/todoapplication/TodoApplication/src/main/java/TodoApplication.java` program's `main` class.
