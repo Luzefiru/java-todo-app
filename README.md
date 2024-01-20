@@ -36,11 +36,23 @@ This requires [XAMPP](https://www.apachefriends.org/download.html) to be running
 5. In the "File to import:" section, use the `server/todoapplication/TodoApplication/src/main/java/SQL File/task.sql` file.
 6. Click "Import".
 
+#### Alternative: Docker
+
+> NOTE: Only use this if you don't want to do the XAMPP setup above!
+
+First, you need to download & setup [Docker Desktop](https://docs.docker.com/desktop/install/windows-install/).
+
+```bash
+cd server
+docker compose up
+```
+
 ### Backend Server
 
 In an IDE, run the `server/todoapplication/TodoApplication/src/main/java/TodoApplication.java` program's `main` class.
 
 > Ensure you are running the newest version of the [Java Runtime](https://www.java.com/en/download/manual.jsp).
+
 > NOTE: I've only tested this on VSCode.
 
 It will be accessible via `http://localhost:3000/api/todos`.
