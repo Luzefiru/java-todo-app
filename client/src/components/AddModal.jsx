@@ -46,7 +46,7 @@ function AddModal() {
   return (
     <>
       <button
-        className="font-bold btn btn-primary"
+        className="font-bold btn btn-secondary"
         onClick={() => document.getElementById('add-modal').showModal()}
       >
         Add Todo
