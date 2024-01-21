@@ -1,5 +1,6 @@
 import axios from 'axios';
-const baseUrl = 'http://localhost:3000/api/todos';
+// const baseUrl = 'http://localhost:3000/api/todos';
+const baseUrl = 'http://localhost:3000/todos';
 
 /**
  * Formats the ISO date string to be compatible with the Java backend.
