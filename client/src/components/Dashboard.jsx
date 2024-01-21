@@ -11,22 +11,24 @@ function Dashboard({ todos }) {
   }
 
   return (
-    <section className="border-[1px] rounded-lg shadow py-6 mb-4 flex gap-8 justify-around">
-      <div className="flex items-center gap-8">
-        <div className="avatar">
-          <div className="w-32 rounded-full">
+    <section className="border-[1px] rounded-lg shadow py-6 mb-4 flex flex-col md:flex-row justify-around px-4">
+      <div className="flex items-center justify-center gap-2 md:gap-12">
+        <div className="px-4 avatar md:px-0">
+          <div className="w-full rounded-full aspect-square">
             <img src={getRandomAvatarImage()} />
           </div>
         </div>
         <div className="grid items-center py-4 prose">
-          <h2 className="mb-2">Welcome back, User.</h2>
+          <h2 className="mb-2 text-base md:text-2xl">Welcome back, User.</h2>
           <blockquote>
-            <p>What are your plans for today?</p>
+            <p className="text-xs text-gray-500 md:text-base">
+              What are your plans for today?
+            </p>
           </blockquote>
         </div>
       </div>
-      <div className="stats">
-        <div className="stat">
+      <div className="px-4 md:px-0 stats">
+        <div className="items-center stat">
           <div className="text-base stat-figure"></div>
           <div className="stat-title">Tasks today</div>
           <div className="stat-value">
@@ -35,7 +37,7 @@ function Dashboard({ todos }) {
           <div className="stat-desc">to be done</div>
         </div>
 
-        <div className="stat">
+        <div className="items-center stat">
           <div className="stat-figure text-accent"></div>
           <div className="stat-title">Tasks this week</div>
           <div className="stat-value">
@@ -44,7 +46,7 @@ function Dashboard({ todos }) {
           <div className="stat-desc">to be done</div>
         </div>
 
-        <div className="stat">
+        <div className="items-center stat">
           <div className="stat-figure"></div>
           <div className="stat-title">Tasks done</div>
           <div className="stat-value">
