@@ -1,10 +1,10 @@
-import Navbar from "./components/Navbar";
-import Dashboard from "./components/Dashboard";
-import TodoTable from "./components/TodoTable";
-import Footer from "./components/Footer";
+import Navbar from './components/Navbar';
+import Dashboard from './components/Dashboard';
+import TodoTable from './components/TodoTable';
+import Footer from './components/Footer';
 
-import { useState, useEffect } from "react";
-import todoService from "./services/todo.service";
+import { useState, useEffect } from 'react';
+import todoService from './services/todo.service';
 
 function App() {
   const [todos, setTodos] = useState(undefined);
@@ -22,13 +22,10 @@ function App() {
       <div className="flex flex-col h-screen">
         <Navbar />
         <main className="mx-8 my-8 lg:mx-24">
-          <Dashboard todos={todos} />
-          <TodoTable todos={todos} />
+          <Dashboard todos={todos ?? []} />
+          <TodoTable todos={todos ?? []} />
         </main>
-        <footer className="mt-auto">
-          {/* Insert footer here */}
-          <Footer />
-        </footer>
+        <Footer />
       </div>
     </>
   );

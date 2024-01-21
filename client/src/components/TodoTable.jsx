@@ -27,7 +27,7 @@ function TodoTable({ todos }) {
             type="checkbox"
             checked={isShowingCompleted}
             className="checkbox checkbox-secondary"
-            onClick={() => {
+            onChange={() => {
               setIsShowingCompleted((oldValue) => !oldValue);
             }}
           />
