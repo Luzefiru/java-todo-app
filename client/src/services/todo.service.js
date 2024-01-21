@@ -23,14 +23,18 @@ function formatDate(dateString) {
 const todoService = (() => {
   const getTodos = async () => {
     const { data } = await axios.get(baseUrl);
-    const formattedData = data.map((t) => {
-      return {
-        id: t.taskID,
-        title: t.title,
-        due_date: t.due_date,
-        is_completed: t.is_completed,
-      };
-    });
+    const formattedData = data
+      .map((t) => {
+        return {
+          id: t.taskID,
+          title: t.title,
+          due_date: t.due_date,
+          is_completed: t.is_completed,
+        };
+      })
+      .sort((a, b) => {
+        return new Date(a.due_date) > new Date(b.due_date) ? 1 : -1;
+      });
     return formattedData;
   };
 
