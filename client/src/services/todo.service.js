@@ -1,6 +1,7 @@
 import axios from 'axios';
-// const baseUrl = 'http://localhost:3000/api/todos';
-const baseUrl = 'http://localhost:3000/todos';
+const baseUrl =
+  import.meta.env.VITE_MOCK_API_URL || 'http://localhost:3000/api/todos';
+console.log(baseUrl);
 
 /**
  * Formats the ISO date string to be compatible with the Java backend.
