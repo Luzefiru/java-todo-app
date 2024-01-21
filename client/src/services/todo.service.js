@@ -1,7 +1,6 @@
 import axios from 'axios';
 const baseUrl =
   import.meta.env.VITE_MOCK_API_URL || 'http://localhost:3000/api/todos';
-console.log(baseUrl);
 
 /**
  * Formats the ISO date string to be compatible with the Java backend.
@@ -28,7 +27,7 @@ const todoService = (() => {
     const formattedData = data
       .map((t) => {
         return {
-          id: t.taskID,
+          id: import.meta.env.VITE_MOCK_API_URL ? t.id : t.taskID,
           title: t.title,
           due_date: t.due_date,
           is_completed: t.is_completed,
@@ -43,7 +42,7 @@ const todoService = (() => {
   const createTodo = async ({ title, dueDate, isCompleted }) => {
     const { data } = await axios.post(baseUrl, {
       title,
-      due_date: formatDate(new Date(dueDate)),
+      due_date: dueDate === '' ? null : formatDate(new Date(dueDate)),
       is_completed: isCompleted,
     });
     return data;
@@ -53,7 +52,7 @@ const todoService = (() => {
     const { data } = await axios.put(`${baseUrl}/${id}`, {
       id: Number(id),
       title,
-      due_date: formatDate(new Date(dueDate)),
+      due_date: dueDate === '' ? null : formatDate(new Date(dueDate)),
       is_completed: isCompleted,
     });
     return data;

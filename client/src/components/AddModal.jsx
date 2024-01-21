@@ -13,8 +13,8 @@ function AddModal() {
 
   const handleSubmit = () => {
     // input validation
-    if (title === '' || dueDate === '') {
-      setError('Error: Title or Due Date fields must not be empty!');
+    if (title === '') {
+      setError('Error: Title field must not be empty!');
       return;
     }
 

@@ -31,8 +31,8 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
 
   const handleSubmit = () => {
     // input validation
-    if (newTitle === '' || dueDate === '') {
-      setError('Error: newTitle or Due Date fields must not be empty!');
+    if (newTitle === '') {
+      setError('Error: Title field must not be empty!');
       return;
     }
 
@@ -58,12 +58,6 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
   };
 
   const handleChange = (e, setFn) => {
-    console.log({
-      id,
-      title: newTitle,
-      dueDate,
-      isCompleted: newIsCompleted === 'Complete',
-    });
     setFn(e.target.value);
   };
 

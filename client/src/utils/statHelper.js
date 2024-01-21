@@ -12,7 +12,6 @@ const statHelper = (() => {
   };
 
   const getTasksPercentDone = (tasks) => {
-    console.log(getTasksDoneLength(tasks), tasks.length);
     return Math.round((getTasksDoneLength(tasks) / tasks.length) * 100);
   };
 
