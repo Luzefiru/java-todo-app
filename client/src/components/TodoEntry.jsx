@@ -12,11 +12,7 @@ function TodoEntry({ id, title, dueDateISO, isCompleted }) {
 
   return (
     <tr>
-      <th>
-        <label>
-          <input type="checkbox" className="checkbox" />
-        </label>
-      </th>
+      <th></th>
       <td>{title}</td>
       <td>{dueDateRenderedValue}</td>
       <td>

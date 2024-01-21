@@ -1,8 +1,14 @@
 import propTypes from 'prop-types';
 import TodoEntry from './TodoEntry';
+import { useState } from 'react';
 
 function TodoTable({ todos }) {
-  if (todos === undefined) {
+  const [isShowingCompleted, setIsShowingCompleted] = useState(true);
+  const filteredTodos = isShowingCompleted
+    ? todos
+    : todos.filter((t) => !t.is_completed);
+
+  if (filteredTodos === undefined) {
     return (
       <div className="flex items-center justify-center w-full mt-16">
         <span className="loading loading-ring loading-lg" />
@@ -11,7 +17,22 @@ function TodoTable({ todos }) {
   }
 
   return (
-    <div className="overflow-x-auto border-[1px] rounded-lg shadow">
+    <div className="overflow-x-auto border-[1px] rounded-lg shadow grid">
+      <div className="flex pt-4 pr-4 ml-auto form-control w-fit">
+        <label className="cursor-pointer label">
+          <span className="mr-2 font-semibold label-text opacity-70">
+            Show completed tasks
+          </span>
+          <input
+            type="checkbox"
+            checked={isShowingCompleted}
+            className="checkbox checkbox-secondary"
+            onClick={() => {
+              setIsShowingCompleted((oldValue) => !oldValue);
+            }}
+          />
+        </label>
+      </div>
       <table className="table">
         {/* head */}
         <thead>
@@ -25,7 +46,7 @@ function TodoTable({ todos }) {
         </thead>
         {/* body */}
         <tbody>
-          {todos?.map((t) => (
+          {filteredTodos?.map((t) => (
             <TodoEntry
               id={Number(t.id)}
               title={t.title}
