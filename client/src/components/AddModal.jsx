@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import todoService from '../services/todo.service';
-import propTypes from 'prop-types';
 
 function AddModal() {
   const [title, setTitle] = useState('');
@@ -153,12 +152,5 @@ function AddModal() {
     </>
   );
 }
-
-AddModal.propTypes = {
-  id: propTypes.number.isRequired,
-  title: propTypes.string.isRequired,
-  dueDateISO: propTypes.string,
-  isCompleted: propTypes.bool.isRequired,
-};
 
 export default AddModal;

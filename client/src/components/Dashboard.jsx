@@ -1,4 +1,15 @@
-function Dashboard() {
+import propTypes from 'prop-types';
+import statHelper from '../utils/statHelper';
+
+function Dashboard({ todos }) {
+  if (todos === undefined) {
+    return (
+      <div className="flex items-center justify-center w-full h-full">
+        <span className="loading loading-ring loading-lg" />
+      </div>
+    );
+  }
+
   return (
     <section className="border-[1px] rounded-lg shadow py-6 mb-4 flex gap-8 justify-around">
       <div className="flex items-center gap-8">
@@ -16,57 +27,49 @@ function Dashboard() {
       </div>
       <div className="stats">
         <div className="stat">
-          <div className="stat-figure text-primary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-8 h-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M4.318 6.318a4.5 4.5 0 000 6.364L12 20.364l7.682-7.682a4.5 4.5 0 00-6.364-6.364L12 7.636l-1.318-1.318a4.5 4.5 0 00-6.364 0z"
-              ></path>
-            </svg>
+          <div className="text-base stat-figure"></div>
+          <div className="stat-title">Tasks today</div>
+          <div className="stat-value">
+            {statHelper.getTasksOnCurrentDayLength(todos)}
           </div>
-          <div className="stat-title">Total Likes</div>
-          <div className="stat-value text-primary">25.6K</div>
-          <div className="stat-desc">21% more than last month</div>
+          <div className="stat-desc">to be done</div>
         </div>
 
         <div className="stat">
-          <div className="stat-figure text-secondary">
-            <svg
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 24 24"
-              className="inline-block w-8 h-8 stroke-current"
-            >
-              <path
-                strokeLinecap="round"
-                strokeLinejoin="round"
-                strokeWidth="2"
-                d="M13 10V3L4 14h7v7l9-11h-7z"
-              ></path>
-            </svg>
+          <div className="stat-figure text-accent"></div>
+          <div className="stat-title">Tasks this week</div>
+          <div className="stat-value">
+            {statHelper.getTasksThisWeekLength(todos)}
           </div>
-          <div className="stat-title">Page Views</div>
-          <div className="stat-value text-secondary">2.6M</div>
-          <div className="stat-desc">21% more than last month</div>
+          <div className="stat-desc">to be done</div>
         </div>
 
         <div className="stat">
-          <div className="stat-figure text-secondary"></div>
-          <div className="stat-value">86%</div>
+          <div className="stat-figure"></div>
           <div className="stat-title">Tasks done</div>
-          <div className="stat-desc text-secondary">31 tasks remaining</div>
+          <div className="stat-value">
+            {statHelper.getTasksPercentDone(todos)}%
+          </div>
+          <div
+            className={`stat-desc ${
+              statHelper.isNotTotallyCompleted(todos)
+                ? 'text-error'
+                : 'text-success'
+            }`}
+          >
+            {statHelper.isNotTotallyCompleted(todos)
+              ? `${statHelper.getRemainingTasksLength(todos)} tasks remaining`
+              : 'good job! 🎉🎉'}
+          </div>
         </div>
       </div>
     </section>
   );
 }
+
+Dashboard.propTypes = {
+  todos: propTypes.arrayOf(propTypes.object).isRequired,
+};
 
 function hashStringToNumber(str, maxIndex) {
   const ASCII_VALUE = Array.from(str).reduce(

@@ -1,18 +1,7 @@
+import propTypes from 'prop-types';
 import TodoEntry from './TodoEntry';
-import { useState, useEffect } from 'react';
-import todoService from '../services/todo.service';
 
-function TodoTable() {
-  const [todos, setTodos] = useState(undefined);
-
-  useEffect(() => {
-    const fetchTodos = async () => {
-      const fetchedTodos = await todoService.getTodos();
-      setTodos(fetchedTodos);
-    };
-    fetchTodos();
-  }, []);
-
+function TodoTable({ todos }) {
   if (todos === undefined) {
     return (
       <div className="flex items-center justify-center w-full mt-16">
@@ -51,5 +40,9 @@ function TodoTable() {
     </div>
   );
 }
+
+TodoTable.propTypes = {
+  todos: propTypes.arrayOf(propTypes.object).isRequired,
+};
 
 export default TodoTable;
