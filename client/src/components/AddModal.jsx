@@ -2,49 +2,31 @@ import { useState } from 'react';
 import todoService from '../services/todo.service';
 import propTypes from 'prop-types';
 
-function EditModal({ id, title, dueDateISO, isCompleted }) {
-  const [newTitle, setNewTitle] = useState(title);
-  const [dueDate, setDueDate] = useState(
-    dueDateISO ? new Date(dueDateISO).toISOString().slice(0, 16) : ''
-  );
-  const [newIsCompleted, setNewIsCompleted] = useState(
-    isCompleted ? 'Complete' : 'Pending'
-  );
+function AddModal() {
+  const [title, setTitle] = useState('');
+  const [dueDate, setDueDate] = useState('');
+  const [newIsCompleted, setNewIsCompleted] = useState('Pending');
   const [error, setError] = useState('');
 
   const handleClose = () => {
-    document.getElementById(`edit-modal-${id}`).close();
-  };
-
-  const handleDelete = () => {
-    const deleteTodo = async () => {
-      try {
-        await todoService.deleteTodo(id);
-        window.location.reload();
-      } catch (e) {
-        console.error(e);
-        setError('Something went wrong! Check the logs.');
-      }
-    };
-    deleteTodo();
+    document.getElementById('add-modal').close();
   };
 
   const handleSubmit = () => {
     // input validation
-    if (newTitle === '' || dueDate === '') {
-      setError('Error: newTitle or Due Date fields must not be empty!');
+    if (title === '' || dueDate === '') {
+      setError('Error: Title or Due Date fields must not be empty!');
       return;
     }
 
-    const updateTodo = async () => {
+    const createTodo = async () => {
       try {
-        await todoService.updateTodo({
-          id,
-          title: newTitle,
+        await todoService.createTodo({
+          title: title,
           dueDate,
           isCompleted: newIsCompleted === 'Complete',
         });
-        setNewTitle('');
+        setTitle('');
         setDueDate('');
         setError('');
         handleClose();
@@ -54,45 +36,26 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
         setError('Something went wrong! Check the logs.');
       }
     };
-    updateTodo();
+    createTodo();
   };
 
   const handleChange = (e, setFn) => {
-    console.log({
-      id,
-      title: newTitle,
-      dueDate,
-      isCompleted: newIsCompleted === 'Complete',
-    });
     setFn(e.target.value);
   };
 
   return (
     <>
       <button
-        className="btn btn-circle glass"
-        onClick={() => document.getElementById(`edit-modal-${id}`).showModal()}
+        className="font-bold btn btn-primary"
+        onClick={() => document.getElementById('add-modal').showModal()}
       >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          fill="none"
-          viewBox="0 0 24 24"
-          strokeWidth={1.5}
-          stroke="currentColor"
-          className="w-6 h-6"
-        >
-          <path
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            d="M16.862 4.487l1.687-1.688a1.875 1.875 0 112.652 2.652L10.582 16.07a4.5 4.5 0 01-1.897 1.13L6 18l.8-2.685a4.5 4.5 0 011.13-1.897l8.932-8.931zm0 0L19.5 7.125M18 14v4.75A2.25 2.25 0 0115.75 21H5.25A2.25 2.25 0 013 18.75V8.25A2.25 2.25 0 015.25 6H10"
-          />
-        </svg>
+        Add Todo
       </button>
-      <dialog id={`edit-modal-${id}`} className="modal">
+      <dialog id={'add-modal'} className="modal">
         <div className="w-11/12 max-w-5xl modal-box">
           <div className="flex items-center justify-between">
             {' '}
-            <h3 className="text-xl">Edit Todo</h3>
+            <h3 className="text-xl">Add Todo</h3>
             <button
               className="bg-white border-white shadow-none btn btn-sm btn-square no-animation"
               onClick={() => handleClose()}
@@ -119,9 +82,9 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
               <span className="font-semibold label-text">Title</span>
             </label>
             <input
-              value={newTitle}
+              value={title}
               onChange={(e) => {
-                handleChange(e, setNewTitle);
+                handleChange(e, setTitle);
               }}
               type="text"
               placeholder="Something to do"
@@ -162,43 +125,6 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
           {error !== '' && <p className="font-semibold text-error">{error}</p>}
           <div className="modal-action">
             <div className="flex gap-4" method="dialog">
-              {/* if there is a button, it will close the modal */}
-              <button
-                className="p-3 btn btn-square btn-outline btn-error"
-                onClick={() => {
-                  handleDelete();
-                }}
-              >
-                <svg
-                  xmlns="http://www.w3.org/2000/svg"
-                  className="ionicon"
-                  viewBox="0 0 512 512"
-                >
-                  <path
-                    d="M112 112l20 320c.95 18.49 14.4 32 32 32h184c17.67 0 30.87-13.51 32-32l20-320"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="32"
-                  />
-                  <path
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeMiterlimit="10"
-                    strokeWidth="32"
-                    d="M80 112h352"
-                  />
-                  <path
-                    d="M192 112V72h0a23.93 23.93 0 0124-24h80a23.93 23.93 0 0124 24h0v40M256 176v224M184 176l8 224M328 176l-8 224"
-                    fill="none"
-                    stroke="currentColor"
-                    strokeLinecap="round"
-                    strokeLinejoin="round"
-                    strokeWidth="32"
-                  />
-                </svg>
-              </button>
               <button
                 className="p-3 btn btn-square btn-outline btn-success"
                 onClick={() => {
@@ -228,11 +154,11 @@ function EditModal({ id, title, dueDateISO, isCompleted }) {
   );
 }
 
-EditModal.propTypes = {
+AddModal.propTypes = {
   id: propTypes.number.isRequired,
   title: propTypes.string.isRequired,
   dueDateISO: propTypes.string,
   isCompleted: propTypes.bool.isRequired,
 };
 
-export default EditModal;
+export default AddModal;
