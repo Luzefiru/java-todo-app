@@ -53,7 +53,7 @@ In an IDE, run the `server/todoapplication/TodoApplication/src/main/java/TodoApp
 
 > Ensure you are running the newest version of the [Java Runtime](https://www.java.com/en/download/manual.jsp).
 
-> NOTE: I've only tested this on VSCode.
+> NOTE: We've only tested it in VSCode & IntelliJ.
 
 It will be accessible via `http://localhost:3000/api/todos`.
 
