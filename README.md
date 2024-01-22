@@ -1,10 +1,23 @@
 # java-todo-app
 
-A simple Todo App system with CRUD functionalities.
+<img src="https://github.com/Luzefiru/java-todo-app/assets/105530193/de7192b0-2461-4aea-b977-8cd54abdbb16" style="width: 100%" />
+
+<h4 align="center">A simple Todo App system with CRUD functionalities.</h4>
+<div align="center">
+  <img src="https://img.shields.io/badge/React-20232A?style=for-the-badge&logo=react&logoColor=61DAFB" />
+  <img src="https://img.shields.io/badge/Vite-B73BFE?style=for-the-badge&logo=vite&logoColor=FFD62E" />
+  <img src="https://img.shields.io/badge/Tailwind_CSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" />
+  <img src="https://img.shields.io/badge/daisyUI-1ad1a5?style=for-the-badge&logo=daisyui&logoColor=white" />
+  <img src="https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white" />
+  <img src="https://img.shields.io/badge/Spring_Boot-F2F4F9?style=for-the-badge&logo=spring-boot" />
+  <img src="https://img.shields.io/badge/MySQL-005C84?style=for-the-badge&logo=mysql&logoColor=white" />
+  <img src="https://img.shields.io/badge/Docker-2CA5E0?style=for-the-badge&logo=docker&logoColor=white" />
+</div>
 
 ## Usage
 
 First, we install the `npm` packages of the frontend:
+
 
 ```bash
 git clone git@github.com:Luzefiru/java-todo-app.git
@@ -63,9 +76,10 @@ It will be accessible via `http://localhost:3000/api/todos`.
 java-todo-app/
 │
 ├── client/        # frontend code
+│   └── README.md  # client installation documentation
 │
 ├── server/        # backend code
-│   └── README.md  # API documentation
+│   └── README.md  # server API documentation
 │
 └── README.md      # project documentation
 ```
